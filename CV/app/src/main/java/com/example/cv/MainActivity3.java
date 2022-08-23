@@ -20,7 +20,7 @@ import android.widget.Toast;
 public class MainActivity3 extends AppCompatActivity {
     Button select,submit,clear;
     ImageView photo1;
-
+    String uri1;
     ActivityResultLauncher<String> galleryLauncher;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,23 +33,20 @@ public class MainActivity3 extends AppCompatActivity {
 
 
 
+
         galleryLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
             @Override
             public void onActivityResult(Uri uri) {
-                photo1.setImageURI(uri);
-
-
-            }
-        });
+               uri1=uri.toString();
+                photo1.setImageURI(uri);}});
         select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 galleryLauncher.launch("image/*");
 
+            }});
 
-            }
 
-        });
 
         clear.setOnClickListener(new View.OnClickListener() {
                                      @Override
@@ -63,10 +60,10 @@ public class MainActivity3 extends AppCompatActivity {
                                          EditText Edtjob = findViewById(R.id.editTextTextPersonName3);
                                          Edtjob.getText().clear();
                                          EditText Edtpath = findViewById(R.id.editTextTextPersonName2);
-                                         Edtpath.getText().clear();
-                                     }
-                                 });
-        submit.setOnClickListener(new View.OnClickListener() {
+                                         Edtpath.getText().clear();}});
+
+
+             submit.setOnClickListener(new View.OnClickListener() {
             EditText Edtname = findViewById(R.id.editTextTextPersonName);
             EditText Edtage = findViewById(R.id.editTextTextPersonName1);
             EditText Edtnumber = findViewById(R.id.editTextNumber);
@@ -74,13 +71,11 @@ public class MainActivity3 extends AppCompatActivity {
             EditText  Edtpath = findViewById(R.id.editTextTextPersonName2);
 
 
-
             @Override
             public void onClick(View view) {
                 if (Edtname.getText().toString().equals("")) {
-                    Toast.makeText(MainActivity3.this, "Plz make sure to fill the space", Toast.LENGTH_SHORT).show();
-
-                } else if (Edtage.getText().toString().equals("")) {
+                    Toast.makeText(MainActivity3.this, "Plz make sure to fill the space", Toast.LENGTH_SHORT).show();}
+                else if (Edtage.getText().toString().equals("")) {
                     Toast.makeText(MainActivity3.this, "Plz make sure to fill the space", Toast.LENGTH_SHORT).show();
                 } else if (Edtnumber.getText().toString().equals("")) {
                     Toast.makeText(MainActivity3.this, "Plz make sure to fill the space", Toast.LENGTH_SHORT).show();
@@ -106,15 +101,8 @@ public class MainActivity3 extends AppCompatActivity {
                     intent3.putExtra("number", number);
                     intent3.putExtra("job", job);
                     intent3.putExtra("path",path);
-                    intent3.putExtra("image-uri",photo1.toString());
-                    startActivity(intent3);
-
-
-            }
-
-
-        }
-        });
+                    intent3.putExtra("uri",uri1);
+                    startActivity(intent3);}}});
 
 
 
